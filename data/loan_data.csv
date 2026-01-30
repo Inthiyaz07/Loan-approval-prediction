@@ -1,0 +1,3 @@
+Loan_ID,Gender,Married,Education,ApplicantIncome,LoanAmount,Credit_History,Loan_Status
+LP001002,Male,Yes,Graduate,5849,128,1,Y
+LP001003,Male,No,Graduate,4583,128,1,Y
