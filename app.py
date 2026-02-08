@@ -17,7 +17,18 @@ if not os.path.exists(MODEL_PATH):
     st.error("Model file not found: loan_model.pkl")
     st.stop()
 
-model = pickle.load(open(MODEL_PATH, "rb"))
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "loan_model.pkl")
+
+try:
+    with open(MODEL_PATH, "rb") as f:
+        model = pickle.load(f)
+except Exception as e:
+    st.error("Model loading failed")
+    st.code(str(e))
+    st.stop()
 
 # Input fields
 gender = st.selectbox("Gender", ["Male", "Female"])
@@ -42,3 +53,4 @@ if st.button("Predict"):
         st.success("✅ Loan Approved")
     else:
         st.error("❌ Loan Not Approved")
+
