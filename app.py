@@ -4,7 +4,7 @@ import subprocess
 import pickle
 import streamlit as st
 
-BASE_DIR = os.path.dirname(os.path.abspath(_file_))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "loan_model.pkl")
 
 # Train model if it does not exist
@@ -44,5 +44,6 @@ if st.button("Predict"):
         st.success("✅ Loan Approved")
     else:
         st.error("❌ Loan Not Approved")
+
 
 
