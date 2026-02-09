@@ -1,14 +1,13 @@
-import os
 import pickle
 import streamlit as st
 import numpy as np
-
-BASE_DIR = os.path.dirname(os.path.abspath(_file_))
-MODEL_PATH = os.path.join(BASE_DIR, "loan_model.pkl")
+import os
 
 st.set_page_config(page_title="Loan Approval Prediction", page_icon="💰")
 st.title("💰 Loan Approval Prediction")
 st.write("Enter applicant details to predict loan approval")
+
+MODEL_PATH = "loan_model.pkl"
 
 if not os.path.exists(MODEL_PATH):
     st.error("Model file not found: loan_model.pkl")
@@ -45,6 +44,7 @@ if st.button("Predict"):
         st.success("✅ Loan Approved")
     else:
         st.error("❌ Loan Not Approved")
+
 
 
 
