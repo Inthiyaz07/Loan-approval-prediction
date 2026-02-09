@@ -1,18 +1,19 @@
 import os
-import sys
-import subprocess
 import pickle
 import streamlit as st
+import numpy as np
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(_file_))
 MODEL_PATH = os.path.join(BASE_DIR, "loan_model.pkl")
 
-# Train model if it does not exist
-if not os.path.exists(MODEL_PATH):
-    st.warning("Model not found. Training model...")
-    subprocess.run([sys.executable, "train_model.py"], check=True)
+st.set_page_config(page_title="Loan Approval Prediction", page_icon="💰")
+st.title("💰 Loan Approval Prediction")
+st.write("Enter applicant details to predict loan approval")
 
-# Load model
+if not os.path.exists(MODEL_PATH):
+    st.error("Model file not found: loan_model.pkl")
+    st.stop()
+
 try:
     with open(MODEL_PATH, "rb") as f:
         model = pickle.load(f)
@@ -44,6 +45,7 @@ if st.button("Predict"):
         st.success("✅ Loan Approved")
     else:
         st.error("❌ Loan Not Approved")
+
 
 
 
