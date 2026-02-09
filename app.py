@@ -1,4 +1,4 @@
-import pickle
+import joblib
 import streamlit as st
 import numpy as np
 import os
@@ -7,15 +7,14 @@ st.set_page_config(page_title="Loan Approval Prediction", page_icon="💰")
 st.title("💰 Loan Approval Prediction")
 st.write("Enter applicant details to predict loan approval")
 
-MODEL_PATH = "loan_model.pkl"
+MODEL_PATH = "loan_model.joblib"
 
 if not os.path.exists(MODEL_PATH):
-    st.error("Model file not found: loan_model.pkl")
+    st.error("Model file not found: loan_model.joblib")
     st.stop()
 
 try:
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
+    model = joblib.load(MODEL_PATH)
 except Exception as e:
     st.error("Model loading failed")
     st.code(str(e))
@@ -44,6 +43,7 @@ if st.button("Predict"):
         st.success("✅ Loan Approved")
     else:
         st.error("❌ Loan Not Approved")
+
 
 
 
